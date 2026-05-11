@@ -51,12 +51,14 @@ it light up in the running code.
   app init` scaffolds — fighting Shopify's tooling to keep Python uniform
   would have lost more time than it saved
 
-### Build order and time-boxing
+### Build order
 
-- Task 1 (~60 min in brief) → did this first; the schema gates everything else
-- Task 2 (~75 min) → slowest because of agent loop + tool use + Urdu testing
-- Task 3 (~50 min) → cheapest to demo well; books.toscrape gave us a stable target
-- Task 4 (~45 min in brief, took ~90 min) → most moving parts (Shopify Partner setup, dev tunnel, theme editor, dev-store quirks)
+- **Task 1** first — the schema gates everything else
+- **Task 2** next — slowest, because the agent loop + tool use + Urdu testing needed the most iteration
+- **Task 3** — cheapest to demo well once books.toscrape was chosen as the stable target
+- **Task 4** last — most moving parts (Shopify Partner setup, dev tunnel, theme editor, dev-store quirks)
+
+**Total time: ~4 hours 15 minutes.**
 
 ---
 
