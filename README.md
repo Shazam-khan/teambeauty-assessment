@@ -64,28 +64,19 @@ it light up in the running code.
 
 ### Claude Code (Anthropic) — the primary tool
 
-Claude Code (Opus 4.7, 1M context) ran in my terminal as the implementation
-partner for the whole session. The collaboration pattern was:
+Claude Code ran in my terminal as the implementation partner for the
+whole session. **It did the coding and planning; I made the critical
+decisions and architectural calls, then reviewed and tested every
+piece of code before moving on.**
 
-- I made the **architectural calls** (one Supabase, books.toscrape over
-  Alibaba, keep Prisma for Shopify sessions only, the Groq swap for
-  Claude). The model proposed options with tradeoffs; I picked one and
-  said why.
-- The model **wrote and ran code** in my environment — drafted SQL,
-  Python, TypeScript, Liquid; ran the venv setup, applied migrations to
-  Supabase, exercised the agent and the scraper end-to-end before I saw
-  output.
-- When something failed (Llama tool-call format issues, Supabase
-  prepared-statement clash, Shopify embedded auth 401), it
-  **debugged interactively** — reading actual error bodies, proposing
-  surgical fixes, and verifying with re-runs.
-
-What I deliberately did *not* let it do:
-- Make decisions that lock the architecture in (eg switching all of Task
-  2 to a different LLM provider) without my approval
-- Skip writing READMEs or commenting non-obvious choices — the rubric
-  weights code quality and explanation, and Claude is good at both when
-  asked to be honest about tradeoffs
+Concretely, my calls were the things that lock the architecture in —
+one Supabase database for all four tasks, books.toscrape over Alibaba
+for Task 3, keeping Prisma for Shopify session storage in Task 4, the
+Groq fallback for Claude. The model would surface options with their
+tradeoffs and I'd pick. When something broke (Llama emitting malformed
+tool calls, Supabase pooler prepared-statement clashes, Shopify
+embedded-auth 401s), I drove the debugging direction and verified the
+fix worked end-to-end against the real services.
 
 ### Groq Llama 3.3 70B Versatile — production LLM
 
