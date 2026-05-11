@@ -1,0 +1,19 @@
+# Shared infrastructure
+psycopg[binary]==3.2.3
+psycopg-pool==3.2.4
+pgvector==0.3.6
+python-dotenv==1.0.1
+
+# Task 1B + Task 2 — embeddings
+sentence-transformers==3.3.1
+
+# Task 2 — API + agent
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+openai==1.57.0
+pydantic==2.10.3
+
+# Task 3 — scraper
+playwright==1.49.0
+apscheduler==3.10.4
+beautifulsoup4==4.12.3

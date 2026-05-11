@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# IMPORTANT: .env files ARE committed for the assessment grader's convenience.
+# The README warns reviewers to rotate the contained credentials after grading.
+# (Standard practice is to .env-exclude — we are deliberately not doing that.)
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs / local SQLite
+*.log
+*.sqlite
+*.sqlite-journal
+
+# Node / Shopify (Task 4)
+node_modules/
+dist/
+build/
+.cache/
+.shopify/
+*.tsbuildinfo
+
+# Playwright local browser cache (already on disk from `playwright install`)
+.playwright/

@@ -1,0 +1,180 @@
+{%- comment -%}
+  Product reviews App Block.
+  Renders the AI-summary line, the list of submitted reviews, and a
+  submission form. All dynamic data is fetched client-side from the
+  Remix app's /api/* routes — see assets/reviews.js.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = block.settings.product
+  assign sku = product.selected_or_first_available_variant.sku
+  assign app_url = block.settings.app_url | strip
+-%}
+
+<div
+  id="tb-reviews-{{ block.id }}"
+  class="tb-reviews"
+  data-sku="{{ sku }}"
+  data-shop="{{ shop.permanent_domain }}"
+  data-app-url="{{ app_url }}"
+  style="--tb-accent: {{ block.settings.accent_colour }};"
+>
+  <h2 class="tb-reviews__heading">{{ block.settings.heading }}</h2>
+
+  {% if sku == blank %}
+    <p class="tb-reviews__warning">
+      This product has no SKU set on its first variant. Add one in the
+      Shopify admin to enable reviews.
+    </p>
+  {% elsif app_url == blank %}
+    <p class="tb-reviews__warning">
+      App URL is not configured. Open the theme editor and paste your
+      app's tunnel URL (e.g. <code>https://abc-123.trycloudflare.com</code>)
+      into the block settings.
+    </p>
+  {% else %}
+    <div class="tb-reviews__summary" data-tb="summary">
+      <span class="tb-reviews__summary-loading">Loading summary…</span>
+    </div>
+
+    <ul class="tb-reviews__list" data-tb="list">
+      <li class="tb-reviews__list-loading">Loading reviews…</li>
+    </ul>
+
+    <details class="tb-reviews__form-wrap">
+      <summary>Write a review</summary>
+      <form class="tb-reviews__form" data-tb="form">
+        <label>
+          <span>Name</span>
+          <input type="text" name="customer_name" required maxlength="100" />
+        </label>
+        <label>
+          <span>Rating</span>
+          <select name="rating" required>
+            <option value="">Choose…</option>
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+        </label>
+        <label>
+          <span>Review</span>
+          <textarea name="review_text" required maxlength="2000" rows="3"></textarea>
+        </label>
+        <button type="submit">Submit</button>
+        <p class="tb-reviews__form-status" data-tb="status"></p>
+      </form>
+    </details>
+  {% endif %}
+</div>
+
+<style>
+  .tb-reviews {
+    font-family: inherit;
+    color: inherit;
+    max-width: 720px;
+    margin: 32px auto;
+    padding: 16px;
+    border: 1px solid #e1e3e5;
+    border-radius: 8px;
+  }
+  .tb-reviews__heading {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .tb-reviews__warning {
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .tb-reviews__summary {
+    background: #f4f6f8;
+    border-left: 3px solid var(--tb-accent, #008060);
+    padding: 8px 12px;
+    margin: 12px 0;
+    border-radius: 4px;
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+  .tb-reviews__summary-loading,
+  .tb-reviews__list-loading { color: #6d7175; }
+  .tb-reviews__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .tb-reviews__list li {
+    padding: 12px 0;
+    border-top: 1px solid #e1e3e5;
+  }
+  .tb-reviews__list li:first-child { border-top: none; }
+  .tb-reviews__rating { color: var(--tb-accent, #008060); margin-right: 8px; }
+  .tb-reviews__author { font-weight: 600; }
+  .tb-reviews__date  { color: #6d7175; font-size: 0.85rem; margin-left: 8px; }
+  .tb-reviews__text  { margin-top: 4px; }
+  .tb-reviews__form-wrap > summary {
+    cursor: pointer;
+    margin-top: 16px;
+    padding: 8px 0;
+    font-weight: 500;
+  }
+  .tb-reviews__form { display: grid; gap: 8px; margin-top: 8px; }
+  .tb-reviews__form label { display: grid; gap: 4px; font-size: 0.9rem; }
+  .tb-reviews__form input,
+  .tb-reviews__form select,
+  .tb-reviews__form textarea {
+    padding: 6px 8px;
+    border: 1px solid #c9cccf;
+    border-radius: 4px;
+    font: inherit;
+  }
+  .tb-reviews__form button {
+    justify-self: start;
+    padding: 8px 16px;
+    background: var(--tb-accent, #008060);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font: inherit;
+  }
+  .tb-reviews__form button[disabled] { opacity: 0.6; cursor: progress; }
+  .tb-reviews__form-status { margin: 0; font-size: 0.85rem; }
+  .tb-reviews__form-status[data-state="ok"]    { color: #008060; }
+  .tb-reviews__form-status[data-state="error"] { color: #d72c0d; }
+</style>
+
+<script src="{{ 'reviews.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Product reviews",
+  "target": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "autofill": true },
+    {
+      "type": "text",
+      "id": "app_url",
+      "label": "App URL",
+      "info": "Public HTTPS URL of your Remix app (the tunnel URL Shopify CLI prints during `shopify app dev`). No trailing slash."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Customer reviews"
+    },
+    {
+      "type": "color",
+      "id": "accent_colour",
+      "label": "Accent colour",
+      "default": "#008060"
+    }
+  ]
+}
+{% endschema %}

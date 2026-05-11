@@ -1,0 +1,15 @@
+item_name,category,material,size,moq,lead_time_days,price_per_unit_usd,customization,notes
+Glass Dropper Bottle,Bottle,Amber Glass,30ml,1000,21,1.45,"Silk-screen printing, custom dropper colour",Best for serums and face oils. Tamper-evident seal available.
+Glass Dropper Bottle,Bottle,Clear Glass,50ml,1000,21,1.75,"Silk-screen printing, custom dropper colour",Same tooling as 30ml; can co-order to reduce setup fees.
+Frosted Glass Jar,Jar,Frosted Glass,50ml,500,28,2.10,"Hot-stamp logo, custom lid colour",Popular for creams and balms. Inner disc included.
+Aluminium Cosmetic Jar,Jar,Aluminium,100g,2000,35,1.20,"Pad printing, anodised finish",Lightweight, recyclable. Common in salt scrubs.
+Airless Pump Bottle,Bottle,PP + AS,30ml,3000,42,2.85,"Custom pump colour, full-body printing",Preserves actives. Higher MOQ due to tooling.
+Airless Pump Bottle,Bottle,PP + AS,50ml,3000,42,3.20,"Custom pump colour, full-body printing",Same tooling family as 30ml airless.
+Squeeze Tube,Tube,LDPE,75ml,5000,30,0.45,"Up to 6-colour offset printing",Lowest unit cost; flip-top or screw cap.
+Mascara Tube with Wand,Tube,PP,10ml,5000,45,1.65,"Custom wand fibre, custom cap finish",Includes integrated wiper. Wand options: silicone or fibre.
+Lipstick Tube,Tube,Aluminium + ABS,3.5g,3000,40,1.40,"Custom outer sleeve, metallic finishes",Mechanism: bullet twist-up. Magnetic close upgrade available.
+Compact Powder Case,Case,ABS,12g,3000,50,2.40,"Pad printing, mirror insert option",Includes pan and sifter. Magnetic close standard.
+White-label Vitamin C Serum,Formulation,N/A,30ml,1500,60,4.80,"Custom fragrance, custom concentration (10–20% L-AA)","Formulation MOQ separate from packaging MOQ. 10% sample lead time: 14 days."
+Private-label Hyaluronic Acid Serum,Formulation,N/A,30ml,1500,60,3.95,"Custom molecular weight blend, custom fragrance",Vegan and cruelty-free. Stability tested for 24 months.
+Lead time bundle discount,Service,N/A,N/A,N/A,N/A,N/A,"Combine 3+ SKUs in one PO to reduce lead time by 7-10 days","Applies when SKUs share a packaging tooling family (e.g. 30ml + 50ml airless)."
+Sample programme,Service,N/A,5–10ml,10,14,15.00,"Up to 3 fragrance variants per sample run",Charged per sample kit. Refunded against first production order over $5,000.
